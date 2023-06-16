@@ -13,7 +13,7 @@ export const UserMenu = () => {
         display: 'flex',
         gap: '10px',
         marginLeft: 'auto',
-        outline: '2px solid blue',
+        // outline: '2px solid blue',
       }}
     >
       <p>{user.name}</p>

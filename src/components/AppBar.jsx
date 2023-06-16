@@ -4,28 +4,59 @@ import { RegistrationForm } from './RegistrationForm/RegistrationForm';
 import Phonebook from 'pages/Phonebook';
 import { LogInForm } from './LogInForm/LogInForm';
 import { UserMenu } from './UserMenu';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { useSelector } from 'react-redux';
+import { isLoggedIn } from 'redux/authorization/slice';
 
 export const AppBar = () => {
+  const isLogIn = useSelector(isLoggedIn);
   return (
     <>
       <nav style={{ display: 'flex', gap: '15px' }}>
-        <NavLink to="/" end>
+        {/* <NavLink to="/" end>
           Home
-        </NavLink>
-        <NavLink to="/contacts">Phonebook</NavLink>
-        <NavLink to="/register">Registration</NavLink>
-        <NavLink to="/login">Log In</NavLink>
-        <UserMenu />
+        </NavLink> */}
+        {isLogIn ? (
+          <>
+            <NavLink to="/contacts">Phonebook</NavLink>
+            <UserMenu />
+          </>
+        ) : (
+          <>
+            <NavLink to="/register">Registration</NavLink>
+            <NavLink to="/" end>
+              Log In
+            </NavLink>
+          </>
+        )}
       </nav>
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contacts" element={<Phonebook />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route
+          path="/contacts"
+          element={<PrivateRoute redirectTo="/" component={<Phonebook />} />}
+        />
+
         <Route
           path="/register"
-          element={<RegistrationForm title="Registration" />}
+          element={
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegistrationForm title="Registration" />}
+            />
+          }
         />
-        <Route path="/login" element={<LogInForm title="Log In" />} />
+        <Route
+          path="/"
+          element={
+            <RestrictedRoute
+              redirectTo="contacts"
+              component={<LogInForm title="Log In" />}
+            />
+          }
+        />
       </Routes>
     </>
   );
