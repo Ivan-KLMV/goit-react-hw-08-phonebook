@@ -1,9 +1,9 @@
 import { FormStyled } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/operations';
-import { selectAddIsLoading, selectContacts } from 'redux/contactListSlice';
+import { addContact } from 'redux/contacts/operations';
+import { selectAddIsLoading, selectContacts } from 'redux/contacts/slice';
 
-export const ContactForm = () => {
+export const ContactForm = ({ title }) => {
   const isLoading = useSelector(selectAddIsLoading);
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
@@ -25,34 +25,37 @@ export const ContactForm = () => {
   };
 
   return (
-    <FormStyled onSubmit={handleSubmit}>
-      <label>
-        name
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-      </label>
-      <label>
-        number
-        <input
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-      </label>
-      <button
-        className={isLoading ? 'addIsLoading' : undefined}
-        disabled={isLoading}
-        type="submit"
-      >
-        add contact
-      </button>
-    </FormStyled>
+    <>
+      <h1>{title}</h1>
+      <FormStyled onSubmit={handleSubmit}>
+        <label>
+          name
+          <input
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+          />
+        </label>
+        <label>
+          number
+          <input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
+        </label>
+        <button
+          className={isLoading ? 'addIsLoading' : undefined}
+          disabled={isLoading}
+          type="submit"
+        >
+          add contact
+        </button>
+      </FormStyled>
+    </>
   );
 };

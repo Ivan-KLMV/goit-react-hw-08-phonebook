@@ -1,23 +1,21 @@
 import { useDispatch } from 'react-redux';
-import { ContactForm, ContactList, Filter } from '../index';
 import { AppContainer } from './App.styled';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
+import { AppBar } from 'components/AppBar';
+import { currentUser } from 'redux/authorization/operations';
 
 export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(currentUser());
     dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
     <AppContainer>
-      <h1>phonebook</h1>
-      <ContactForm />
-      <h2>contacts</h2>
-      <Filter />
-      <ContactList />
+      <AppBar />
     </AppContainer>
   );
 };

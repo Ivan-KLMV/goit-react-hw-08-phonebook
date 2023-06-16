@@ -1,7 +1,7 @@
 import { ContactListStyled } from './ContactList.styled';
 import { useSelector } from 'react-redux';
-import { selectContacts, selectIsLoading } from 'redux/contactListSlice';
-import { selectFilter } from 'redux/contactsFilterSlice';
+import { selectContacts, selectIsLoading } from 'redux/contacts/slice';
+import { selectFilter } from 'redux/contacts/contactsFilterSlice';
 import { Contact } from 'components/Contact';
 
 export const ContactList = () => {
@@ -24,7 +24,6 @@ export const ContactList = () => {
   const noContacts = contacts.length === 0;
   const isContactsTrue = contacts.length > 0;
   const isVisibleContactsTrue = visibleContacts.length > 0;
-  console.log('visibleContacts', visibleContacts);
 
   return (
     <ContactListStyled>
