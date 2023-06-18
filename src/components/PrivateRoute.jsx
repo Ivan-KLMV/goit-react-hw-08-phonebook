@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { isLoggedIn } from 'redux/authorization/slice';
+import { isLoggedIn, isRefreshing } from 'redux/authorization/slice';
 
 export const PrivateRoute = ({ component: Component, redirectTo = '/' }) => {
   const isLogIn = useSelector(isLoggedIn);
+  const isRefresh = useSelector(isRefreshing);
+  const shouldRedirect = !isLogIn && !isRefresh;
 
-  return !isLogIn ? <Navigate to={redirectTo} /> : Component;
+  return shouldRedirect ? <Navigate to={redirectTo} /> : Component;
 };
