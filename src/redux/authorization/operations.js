@@ -37,7 +37,7 @@ export const logOut = createAsyncThunk('auth/logout', async () => {
   token.unset();
 });
 
-export const currentUser = createAsyncThunk(
+export const refreshCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const currentState = thunkAPI.getState();
