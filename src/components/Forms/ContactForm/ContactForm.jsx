@@ -5,6 +5,7 @@ import {
   selectAddIsLoading,
   selectContacts,
 } from 'redux/contacts/contactsSlice';
+import { Button } from '@mui/material';
 
 export const ContactForm = ({ title }) => {
   const isLoading = useSelector(selectAddIsLoading);
@@ -51,13 +52,13 @@ export const ContactForm = ({ title }) => {
             required
           />
         </label>
-        <button
+        <Button
           className={isLoading ? 'addIsLoading' : undefined}
           disabled={isLoading}
           type="submit"
         >
           add contact
-        </button>
+        </Button>
       </FormStyled>
     </>
   );
