@@ -4,7 +4,9 @@ const Phonebook = () => {
   return (
     <>
       <ContactForm title="phonebook" />
-      <h2>contacts</h2>
+      <h2 style={{ marginBottom: '20px', textTransform: 'capitalize' }}>
+        contacts
+      </h2>
       <Filter />
       <ContactList />
     </>
