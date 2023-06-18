@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { FormStyled } from '../ContactForm/ContactForm.styled';
+import { FormStyled, FormTitleStyled } from '../ContactForm/ContactForm.styled';
 import { logIn } from 'redux/authorization/operations';
 
 export const LogInForm = ({ title }) => {
@@ -17,8 +17,7 @@ export const LogInForm = ({ title }) => {
 
   return (
     <>
-      <h1>{title}</h1>
-
+      <FormTitleStyled>{title}</FormTitleStyled>
       <FormStyled onSubmit={handleSubmit} autoComplete="off">
         <label>
           email

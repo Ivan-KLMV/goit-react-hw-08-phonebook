@@ -1,7 +1,10 @@
-import { FormStyled } from './ContactForm.styled';
+import { FormStyled, FormTitleStyled } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
-import { selectAddIsLoading, selectContacts } from 'redux/contacts/slice';
+import {
+  selectAddIsLoading,
+  selectContacts,
+} from 'redux/contacts/contactsSlice';
 
 export const ContactForm = ({ title }) => {
   const isLoading = useSelector(selectAddIsLoading);
@@ -26,7 +29,7 @@ export const ContactForm = ({ title }) => {
 
   return (
     <>
-      <h1>{title}</h1>
+      <FormTitleStyled>{title}</FormTitleStyled>
       <FormStyled onSubmit={handleSubmit}>
         <label>
           name

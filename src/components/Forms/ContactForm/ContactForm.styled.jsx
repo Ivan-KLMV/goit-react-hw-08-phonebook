@@ -82,3 +82,7 @@ export const FormStyled = styled.form`
     }
   }
 `;
+export const FormTitleStyled = styled.h1`
+  margin-bottom: 20px;
+  text-transform: uppercase;
+`;

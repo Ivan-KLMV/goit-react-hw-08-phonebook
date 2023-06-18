@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { FormStyled } from '../ContactForm/ContactForm.styled';
+import { FormStyled, FormTitleStyled } from '../ContactForm/ContactForm.styled';
 import { registration } from 'redux/authorization/operations';
 
 export const RegistrationForm = ({ title }) => {
@@ -18,8 +18,7 @@ export const RegistrationForm = ({ title }) => {
 
   return (
     <>
-      <h1>{title}</h1>
-
+      <FormTitleStyled>{title}</FormTitleStyled>
       <FormStyled onSubmit={handleSubmit} autoComplete="off">
         <label>
           name
