@@ -9,7 +9,6 @@ import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { Layout } from './Layout';
 import { isRefreshing } from 'redux/authorization/slice';
-import { LinearProgress } from '@mui/material';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +20,7 @@ export const App = () => {
   }, [dispatch]);
 
   return isRefresh ? (
-    <LinearProgress />
+    <b>Page is reloading...</b>
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
