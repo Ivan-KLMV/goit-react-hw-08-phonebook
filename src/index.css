@@ -49,6 +49,7 @@ button {
 }
 
 .active {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 4px;
+  text-decoration: underline;
 }
