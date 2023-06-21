@@ -15,20 +15,29 @@ const token = {
 export const registration = createAsyncThunk(
   'auth/registration',
   async (userCedentials, thunkAPI) => {
-    const response = await axios.post('/users/signup', userCedentials);
-    token.set(response.data.token);
-    // console.log(response);
-    return response.data;
+    try {
+      const response = await axios.post('/users/signup', userCedentials);
+      token.set(response.data.token);
+      // console.log(response);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
 export const logIn = createAsyncThunk(
   'auth/login',
   async (userCedentials, thunkAPI) => {
-    const response = await axios.post('/users/login', userCedentials);
-    token.set(response.data.token);
-    // console.log(response.data);
-    return response.data;
+    try {
+      const response = await axios.post('/users/login', userCedentials);
+      token.set(response.data.token);
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(thunkAPI.rejectWithValue(error.message));
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
