@@ -18,7 +18,6 @@ export const registration = createAsyncThunk(
     try {
       const response = await axios.post('/users/signup', userCedentials);
       token.set(response.data.token);
-      // console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -32,10 +31,8 @@ export const logIn = createAsyncThunk(
     try {
       const response = await axios.post('/users/login', userCedentials);
       token.set(response.data.token);
-      // console.log(response.data);
       return response.data;
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(error.message));
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -51,14 +48,16 @@ export const refreshCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const currentState = thunkAPI.getState();
     const currentToken = currentState.auth.token;
-    // console.log('currentUser', Boolean(currentToken));
 
     if (!currentToken) {
-      return thunkAPI.rejectWithValue('no user');
+      return thunkAPI.rejectWithValue('Unable to fetch user');
     }
-    token.set(currentToken);
-    const response = await axios.get('/users/current');
-    // console.log(response.data);
-    return response.data;
+    try {
+      token.set(currentToken);
+      const response = await axios.get('/users/current');
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
