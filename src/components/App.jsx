@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { fetchContacts } from 'redux/contacts/operations';
+// import { fetchContacts } from 'redux/contacts/operations';
 import { refreshCurrentUser } from 'redux/authorization/operations';
 import { RegistrationForm, LogInForm } from './index';
-import Phonebook from 'pages/Phonebook';
+// import Phonebook from 'pages/Phonebook';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { Layout } from './Layout';
