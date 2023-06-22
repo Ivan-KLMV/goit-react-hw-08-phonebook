@@ -1,9 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormStyled, FormTitleStyled } from '../ContactForm/ContactForm.styled';
 import { logIn } from 'redux/authorization/operations';
+import { isLogError } from 'redux/authorization/slice';
 
 export const LogInForm = ({ title }) => {
   const dispatch = useDispatch();
+  const loginError = useSelector(isLogError);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -29,6 +31,7 @@ export const LogInForm = ({ title }) => {
         </label>
         <button type="submit">Log In</button>
       </FormStyled>
+      {loginError && <b style={{ color: 'red' }}>Wrong email or password</b>}
     </>
   );
 };

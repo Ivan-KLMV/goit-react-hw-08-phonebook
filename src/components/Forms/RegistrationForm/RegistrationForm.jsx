@@ -1,9 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormStyled, FormTitleStyled } from '../ContactForm/ContactForm.styled';
 import { registration } from 'redux/authorization/operations';
+import { isRegError } from 'redux/authorization/slice';
 
 export const RegistrationForm = ({ title }) => {
   const dispatch = useDispatch();
+  const regError = useSelector(isRegError);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -40,6 +42,9 @@ export const RegistrationForm = ({ title }) => {
         </label>
         <button type="submit">Register</button>
       </FormStyled>
+      {regError && (
+        <b style={{ color: 'red' }}>This username or email is already in use</b>
+      )}
     </>
   );
 };
