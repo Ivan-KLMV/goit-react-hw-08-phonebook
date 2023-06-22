@@ -9,9 +9,6 @@ export const Navigation = () => {
 
   return (
     <nav style={{ display: 'flex', gap: '15px' }}>
-      {/* <NavLink to="/" end>
-    Home
-  </NavLink> */}
       {isLogIn ? (
         <>
           <NavLink to="/contacts">Phonebook</NavLink>
@@ -20,6 +17,7 @@ export const Navigation = () => {
       ) : (
         <AuthNav />
       )}
+      <NavLink to="/mui">MUI Page</NavLink>
     </nav>
   );
 };
