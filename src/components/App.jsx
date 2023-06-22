@@ -3,14 +3,17 @@ import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 // import { fetchContacts } from 'redux/contacts/operations';
 import { refreshCurrentUser } from 'redux/authorization/operations';
-import { RegistrationForm, LogInForm } from './index';
+// import { RegistrationForm, LogInForm } from './index';
 // import Phonebook from 'pages/Phonebook';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { Layout } from './Layout';
 import { isRefreshing } from 'redux/authorization/slice';
+import MUI from 'pages/MUI';
 
 const PhonebookePage = lazy(() => import('../pages/Phonebook'));
+const LoginPage = lazy(() => import('../pages/Login'));
+const RegisterPage = lazy(() => import('../pages/Register'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -18,7 +21,6 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(refreshCurrentUser());
-    // dispatch(fetchContacts());
   }, [dispatch]);
 
   return isRefresh ? (
@@ -37,20 +39,18 @@ export const App = () => {
           element={
             <RestrictedRoute
               redirectTo="/contacts"
-              component={<RegistrationForm title="Registration" />}
+              component={<RegisterPage />}
             />
           }
         />
         <Route
           index
           element={
-            <RestrictedRoute
-              redirectTo="contacts"
-              component={<LogInForm title="Log In" />}
-            />
+            <RestrictedRoute redirectTo="contacts" component={<LoginPage />} />
           }
         />
       </Route>
+      <Route path="/mui" element={<MUI />} />
     </Routes>
   );
 };
