@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { fetchContacts } from 'redux/contacts/operations';
 import { refreshCurrentUser } from 'redux/authorization/operations';
@@ -10,13 +10,15 @@ import { RestrictedRoute } from './RestrictedRoute';
 import { Layout } from './Layout';
 import { isRefreshing } from 'redux/authorization/slice';
 
+const PhonebookePage = lazy(() => import('../pages/Phonebook'));
+
 export const App = () => {
   const dispatch = useDispatch();
   const isRefresh = useSelector(isRefreshing);
 
   useEffect(() => {
     dispatch(refreshCurrentUser());
-    dispatch(fetchContacts());
+    // dispatch(fetchContacts());
   }, [dispatch]);
 
   return isRefresh ? (
@@ -26,7 +28,9 @@ export const App = () => {
       <Route path="/" element={<Layout />}>
         <Route
           path="/contacts"
-          element={<PrivateRoute redirectTo="/" component={<Phonebook />} />}
+          element={
+            <PrivateRoute redirectTo="/" component={<PhonebookePage />} />
+          }
         />
         <Route
           path="/register"
