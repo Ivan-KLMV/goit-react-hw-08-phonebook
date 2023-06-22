@@ -1,6 +1,14 @@
+import { useEffect } from 'react';
 import { ContactForm, ContactList, Filter } from '../components/index';
+import { useDispatch } from 'react-redux';
+import { fetchContacts } from 'redux/contacts/operations';
 
 const Phonebook = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log('mounting phonebook');
+    dispatch(fetchContacts());
+  }, [dispatch]);
   return (
     <>
       <ContactForm title="phonebook" />
