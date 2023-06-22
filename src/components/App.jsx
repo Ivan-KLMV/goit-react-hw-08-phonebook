@@ -49,8 +49,8 @@ export const App = () => {
             <RestrictedRoute redirectTo="contacts" component={<LoginPage />} />
           }
         />
+        <Route path="/mui" element={<MUI />} />
       </Route>
-      <Route path="/mui" element={<MUI />} />
     </Routes>
   );
 };
